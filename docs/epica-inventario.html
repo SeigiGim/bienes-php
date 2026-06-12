@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+/* ── COVER ── */
+.cover {
+  background: #0f0e1a;
+  color: #fff;
+  min-height: 297mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 72px;
+  page-break-after: always;
+}
+.cover-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #7c6af7;
+  margin-bottom: 20px;
+}
+.cover h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.cover h1 span { color: #7c6af7; }
+.cover-sub {
+  font-size: 15px;
+  color: #94a3b8;
+  max-width: 500px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.cover-stat {
+  background: #1e1b2e;
+  border: 1px solid #2d2a45;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.cover-stat-num {
+  font-size: 32px;
+  font-weight: 700;
+  color: #7c6af7;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cover-stat-label {
+  font-size: 11px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.cover-meta {
+  border-top: 1px solid #1e293b;
+  padding-top: 28px;
+  display: flex;
+  gap: 36px;
+}
+.cover-meta-item label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #475569;
+  display: block;
+  margin-bottom: 3px;
+}
+.cover-meta-item span { font-size: 12px; color: #cbd5e1; }
+
+/* ── TOC ── */
+.toc { padding: 52px 64px; page-break-after: always; }
+.toc-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: #7c6af7; margin-bottom: 28px;
+}
+.toc-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #94a3b8;
+  margin: 22px 0 8px; padding-bottom: 4px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.toc-row {
+  display: flex; align-items: baseline;
+  padding: 6px 0; border-bottom: 1px dotted #e2e8f0; gap: 8px;
+}
+.toc-id { font-size: 10px; font-weight: 700; color: #7c6af7; min-width: 56px; }
+.toc-name { font-size: 12px; color: #1e293b; flex: 1; }
+.toc-badge {
+  font-size: 9px; font-weight: 700; padding: 2px 7px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: .06em;
+  white-space: nowrap;
+}
+.badge-alta { background: #fee2e2; color: #b91c1c; }
+.badge-media { background: #fff7ed; color: #c2410c; }
+.badge-baja { background: #f0fdf4; color: #15803d; }
+.badge-mvp { background: #ede9fe; color: #5b21b6; }
+
+/* ── PAGE ── */
+.page { padding: 44px 64px 52px; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  border-bottom: 3px solid #7c6af7;
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+}
+.sec-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: #7c6af7; margin-bottom: 5px;
+}
+.sec-header h2 { font-size: 24px; font-weight: 700; color: #0f0e1a; }
+.sec-header p { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+h3 { font-size: 15px; font-weight: 700; color: #1e293b; margin: 26px 0 10px; }
+h4 { font-size: 12px; font-weight: 700; color: #7c6af7; text-transform: uppercase; letter-spacing: .07em; margin: 18px 0 8px; }
+p { font-size: 12px; color: #374151; margin-bottom: 9px; }
+
+/* ── EPIC CARD ── */
+.epic-card {
+  background: #faf9ff;
+  border: 1.5px solid #7c6af7;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-bottom: 28px;
+  page-break-inside: avoid;
+}
+.epic-title { font-size: 20px; font-weight: 700; color: #3b1fa8; margin-bottom: 6px; }
+.epic-obj { font-size: 12.5px; color: #374151; margin-bottom: 16px; line-height: 1.6; }
+.metrics-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-top: 14px;
+}
+.metric-item {
+  background: #fff; border: 1px solid #e0d9fb;
+  border-radius: 8px; padding: 10px 14px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.metric-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: #ede9fe; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+  font-size: 14px; font-weight: 700; color: #5b21b6;
+}
+.metric-text { font-size: 11.5px; color: #374151; line-height: 1.5; }
+
+/* ── FEATURE CARD ── */
+.feature-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #7c6af7;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  page-break-inside: avoid;
+}
+.feature-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 6px;
+}
+.feature-id {
+  font-size: 10px; font-weight: 700; background: #ede9fe;
+  color: #5b21b6; padding: 2px 8px; border-radius: 20px;
+  letter-spacing: .06em;
+}
+.feature-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 5px; }
+.feature-desc { font-size: 12px; color: #4b5563; line-height: 1.6; margin-bottom: 10px; }
+.ca-list { margin: 0; padding-left: 0; list-style: none; }
+.ca-list li {
+  font-size: 11.5px; color: #374151;
+  padding: 3px 0 3px 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.ca-list li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: #059669; font-weight: 700; font-size: 11px;
+}
+
+/* ── HU CARD ── */
+.hu-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+}
+.hu-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px; flex-wrap: wrap;
+}
+.hu-id {
+  font-size: 10px; font-weight: 700;
+  background: #f1f5f9; color: #334155;
+  padding: 2px 8px; border-radius: 20px;
+  font-family: 'Courier New', monospace;
+}
+.hu-title { font-size: 13px; font-weight: 700; color: #1e293b; flex: 1; }
+.hu-story {
+  background: #f8fafc; border-left: 3px solid #94a3b8;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px; margin-bottom: 10px;
+  font-size: 11.5px; color: #334155; font-style: italic;
+  line-height: 1.6;
+}
+.gherkin {
+  background: #0f172a; border-radius: 7px;
+  padding: 10px 14px; margin: 8px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 11px; line-height: 1.75;
+}
+.gherkin .g-dado { color: #818cf8; font-weight: 700; }
+.gherkin .g-cuando { color: #34d399; font-weight: 700; }
+.gherkin .g-entonces { color: #fbbf24; font-weight: 700; }
+.gherkin .g-text { color: #e2e8f0; }
+.gherkin .g-y { color: #94a3b8; }
+.notes-box {
+  background: #fffbeb; border: 1px solid #fde68a;
+  border-radius: 6px; padding: 8px 12px; margin-top: 8px;
+  font-size: 11px; color: #78350f; line-height: 1.6;
+}
+.notes-label { font-weight: 700; margin-right: 4px; }
+
+/* ── SUMMARY TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 11.5px; page-break-inside: avoid; }
+th {
+  background: #1e1b2e; color: #e2e8f0;
+  text-align: left; padding: 9px 12px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+tr:last-child td { border-bottom: none; }
+
+/* ── CALLOUT ── */
+.callout {
+  border-radius: 8px; padding: 12px 16px;
+  margin: 14px 0; font-size: 12px; line-height: 1.6;
+  page-break-inside: avoid;
+}
+.callout.purple { background: #f5f3ff; border-left: 3px solid #7c6af7; color: #3b1fa8; }
+.callout.orange { background: #fff7ed; border-left: 3px solid #f97316; color: #7c2d12; }
+.callout.green  { background: #f0fdf4; border-left: 3px solid #22c55e; color: #14532d; }
+.callout b { font-weight: 700; }
+
+/* ── DIVIDERS ── */
+.feature-group-title {
+  font-size: 13px; font-weight: 700; color: #1e293b;
+  background: #f8fafc; border-radius: 8px;
+  padding: 10px 16px; margin: 20px 0 12px;
+  border: 1px solid #e2e8f0;
+  display: flex; align-items: center; gap: 10px;
+}
+.feature-group-title span {
+  background: #ede9fe; color: #5b21b6;
+  font-size: 10px; padding: 2px 8px; border-radius: 20px;
+  font-weight: 700;
+}
+
+@page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════
+     PORTADA
+══════════════════════════ -->
+<div class="cover">
+  <div class="cover-eyebrow">Documentación de producto · Épica + Features + Historias de usuario</div>
+  <h1>API Gestión de<br><span>Bienes</span></h1>
+  <p class="cover-sub">Documentación completa de épica, features e historias de usuario para el backend de inventario empresarial construido en Laravel 13.</p>
+
+  <div class="cover-grid">
+    <div class="cover-stat">
+      <div class="cover-stat-num">1</div>
+      <div class="cover-stat-label">Épica</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">6</div>
+      <div class="cover-stat-label">Features</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">24</div>
+      <div class="cover-stat-label">Historias de usuario</div>
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Stack</label>
+      <span>Laravel 13 · MySQL · API REST</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Fase</label>
+      <span>MVP — Sin autenticación</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>MVP (HU alta prioridad)</label>
+      <span>15 historias obligatorias</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Versión</label>
+      <span>1.0 · Junio 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     TABLA DE CONTENIDOS
+══════════════════════════ -->
+<div class="toc">
+  <div class="toc-eyebrow">Tabla de contenidos</div>
+
+  <div class="toc-section-label">Resumen ejecutivo</div>
+  <div class="toc-row"><span class="toc-id">—</span><span class="toc-name">Épica: Control digital del inventario de activos fijos</span></div>
+  <div class="toc-row"><span class="toc-id">—</span><span class="toc-name">Tabla resumen MVP y priorización</span></div>
+
+  <div class="toc-section-label">Features e historias de usuario</div>
+
+  <div class="toc-row"><span class="toc-id">F-01</span><span class="toc-name">Gestión de datos maestros</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-01</span><span class="toc-name">Crear categoría</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-02</span><span class="toc-name">Listar categorías</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-03</span><span class="toc-name">Crear ubicación</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-04</span><span class="toc-name">Listar ubicaciones</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-05</span><span class="toc-name">Crear responsable</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-01-06</span><span class="toc-name">Listar responsables</span><span class="toc-badge badge-media">Media</span></div>
+
+  <div class="toc-row"><span class="toc-id">F-02</span><span class="toc-name">Registro de bienes</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-02-01</span><span class="toc-name">Crear bien con etiqueta auto-generada</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-02-02</span><span class="toc-name">Listar bienes con filtros</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-02-03</span><span class="toc-name">Ver detalle de un bien</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-02-04</span><span class="toc-name">Editar datos de un bien</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+
+  <div class="toc-row"><span class="toc-id">F-03</span><span class="toc-name">Control de estado y baja</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-03-01</span><span class="toc-name">Cambiar estado del bien</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-03-02</span><span class="toc-name">Dar de baja un bien (soft delete)</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-03-03</span><span class="toc-name">Listar bienes dados de baja</span><span class="toc-badge badge-media">Media</span></div>
+
+  <div class="toc-row"><span class="toc-id">F-04</span><span class="toc-name">Asignación de bienes</span><span class="toc-badge badge-alta">Alta</span></div>
+  <div class="toc-row"><span class="toc-id">HU-04-01</span><span class="toc-name">Asignar bien a responsable</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-04-02</span><span class="toc-name">Asignar bien a ubicación</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-04-03</span><span class="toc-name">Reasignar bien</span><span class="toc-badge badge-media">Media</span></div>
+
+  <div class="toc-row"><span class="toc-id">F-05</span><span class="toc-name">Consulta y búsqueda</span><span class="toc-badge badge-media">Media</span></div>
+  <div class="toc-row"><span class="toc-id">HU-05-01</span><span class="toc-name">Buscar bien por etiqueta</span><span class="toc-badge badge-alta">Alta · MVP</span></div>
+  <div class="toc-row"><span class="toc-id">HU-05-02</span><span class="toc-name">Filtrar bienes por categoría</span><span class="toc-badge badge-media">Media</span></div>
+  <div class="toc-row"><span class="toc-id">HU-05-03</span><span class="toc-name">Filtrar bienes por responsable</span><span class="toc-badge badge-media">Media</span></div>
+  <div class="toc-row"><span class="toc-id">HU-05-04</span><span class="toc-name">Filtrar bienes por ubicación</span><span class="toc-badge badge-media">Media</span></div>
+
+  <div class="toc-row"><span class="toc-id">F-06</span><span class="toc-name">Resumen e indicadores</span><span class="toc-badge badge-baja">Baja</span></div>
+  <div class="toc-row"><span class="toc-id">HU-06-01</span><span class="toc-name">Conteo de bienes por estado</span><span class="toc-badge badge-media">Media</span></div>
+  <div class="toc-row"><span class="toc-id">HU-06-02</span><span class="toc-name">Resumen de bienes por categoría</span><span class="toc-badge badge-baja">Baja</span></div>
+  <div class="toc-row"><span class="toc-id">HU-06-03</span><span class="toc-name">Bienes sin responsable asignado</span><span class="toc-badge badge-baja">Baja</span></div>
+</div>
+
+<!-- ══════════════════════════
+     ÉPICA
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Épica única</div>
+    <h2>Control digital del inventario de activos fijos</h2>
+    <p>La épica raíz que agrupa todas las funcionalidades del sistema</p>
+  </div>
+
+  <div class="epic-card">
+    <div class="epic-title">EP-01 · Control digital del inventario de activos fijos</div>
+    <div class="epic-obj">
+      <strong>Objetivo de negocio:</strong> Reemplazar el control manual de activos (Excel + correos) por una API que permita registrar, ubicar, asignar y controlar el estado de cada bien físico de la organización en tiempo real, eliminando pérdidas de activos, compras duplicadas y la falta de trazabilidad sobre quién tiene qué y dónde.
+    </div>
+    <h4>Criterios de éxito — métricas de completitud</h4>
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-icon">1</div>
+        <div class="metric-text">El 100% de los bienes puede ser registrado con etiqueta única. Cero duplicados de etiqueta posibles.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">2</div>
+        <div class="metric-text">Cada bien tiene un estado definido (activo, en reparación, dado de baja) y un responsable o ubicación asignada.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">3</div>
+        <div class="metric-text">Ningún bien se borra permanentemente: toda baja usa soft delete y es recuperable desde el historial.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">4</div>
+        <div class="metric-text">La app móvil puede consultar, filtrar y actualizar bienes sin errores 500 en el 95% de los requests.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">5</div>
+        <div class="metric-text">Los datos maestros (categorías, ubicaciones, responsables) se gestionan 100% desde la API, sin valores hardcodeados.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">6</div>
+        <div class="metric-text">Todas las HU de prioridad Alta (MVP) pasan sus criterios de aceptación en ambiente de staging.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Tabla resumen — priorización MVP</h3>
+  <table>
+    <tr>
+      <th>ID</th><th>Historia de usuario</th><th>Feature</th>
+      <th>Prioridad</th><th>MVP</th>
+    </tr>
+    <tr><td>HU-01-01</td><td>Crear categoría</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-01-02</td><td>Listar categorías</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-01-03</td><td>Crear ubicación</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-01-04</td><td>Listar ubicaciones</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-01-05</td><td>Crear responsable</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-01-06</td><td>Listar responsables</td><td>F-01 Datos maestros</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-02-01</td><td>Crear bien con etiqueta</td><td>F-02 Registro</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-02-02</td><td>Listar bienes con filtros</td><td>F-02 Registro</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-02-03</td><td>Ver detalle de un bien</td><td>F-02 Registro</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-02-04</td><td>Editar datos de un bien</td><td>F-02 Registro</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-03-01</td><td>Cambiar estado del bien</td><td>F-03 Estado</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-03-02</td><td>Dar de baja (soft delete)</td><td>F-03 Estado</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-03-03</td><td>Listar bienes dados de baja</td><td>F-03 Estado</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-04-01</td><td>Asignar bien a responsable</td><td>F-04 Asignación</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-04-02</td><td>Asignar bien a ubicación</td><td>F-04 Asignación</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-04-03</td><td>Reasignar bien</td><td>F-04 Asignación</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-05-01</td><td>Buscar por etiqueta</td><td>F-05 Búsqueda</td><td><span class="toc-badge badge-alta">Alta</span></td><td>Sí</td></tr>
+    <tr><td>HU-05-02</td><td>Filtrar por categoría</td><td>F-05 Búsqueda</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-05-03</td><td>Filtrar por responsable</td><td>F-05 Búsqueda</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-05-04</td><td>Filtrar por ubicación</td><td>F-05 Búsqueda</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-06-01</td><td>Conteo por estado</td><td>F-06 Indicadores</td><td><span class="toc-badge badge-media">Media</span></td><td>No</td></tr>
+    <tr><td>HU-06-02</td><td>Resumen por categoría</td><td>F-06 Indicadores</td><td><span class="toc-badge badge-baja">Baja</span></td><td>No</td></tr>
+    <tr><td>HU-06-03</td><td>Bienes sin responsable</td><td>F-06 Indicadores</td><td><span class="toc-badge badge-baja">Baja</span></td><td>No</td></tr>
+    <tr><td>HU-06-04</td><td>Bienes sin ubicación</td><td>F-06 Indicadores</td><td><span class="toc-badge badge-baja">Baja</span></td><td>No</td></tr>
+  </table>
+
+  <div class="callout purple">
+    <b>MVP:</b> Las 15 historias marcadas como Alta son el alcance obligatorio de la primera entrega. Las 9 restantes son backlog priorizado para el sprint siguiente.
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-01 DATOS MAESTROS
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-01</div>
+    <h2>Gestión de datos maestros</h2>
+    <p>Categorías, ubicaciones y responsables — los catálogos base que usan los bienes</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-01</span>
+      <span class="toc-badge badge-alta">Alta prioridad</span>
+    </div>
+    <div class="feature-title">Gestión de datos maestros (Categoría, Ubicación, Responsable)</div>
+    <div class="feature-desc">Permite a la app móvil crear y consultar los catálogos base del sistema. Sin estos datos no se puede registrar ningún bien. Los tres catálogos tienen operaciones CRUD básicas y son creados desde la API, no son valores fijos.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>Cada entidad tiene su propio endpoint con rutas independientes.</li>
+      <li>No se permite crear registros con nombre vacío o duplicado dentro del mismo catálogo.</li>
+      <li>El JSON de respuesta usa API Resource con estructura consistente en todas las entidades.</li>
+      <li>Los registros que tienen bienes asociados no pueden eliminarse.</li>
+    </ul>
+  </div>
+
+  <!-- HU-01-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-01</span>
+      <span class="hu-title">Crear categoría</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero crear una nueva categoría para poder clasificar los bienes al momento de registrarlos.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/categorias con { "nombre": "Tecnología" }</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">el nombre no existe previamente en la tabla</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 201 con el objeto creado { id, nombre, created_at }</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/categorias con { "nombre": "Tecnología" } nuevamente</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con error "El nombre ya existe"</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/categorias con nombre vacío</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con error de validación en el campo nombre</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Validación: required|string|max:255|unique:categorias,nombre. Ruta: routes/api/v1/categorias.php. Controller delgado → CategoriaService → Categoria::create().</div>
+  </div>
+
+  <!-- HU-01-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-02</span>
+      <span class="hu-title">Listar categorías</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero obtener la lista de categorías disponibles para poder seleccionar una al registrar un bien.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existen categorías registradas en el sistema</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/categorias</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con array de categorías ordenadas por nombre</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">cada categoría incluye: id, nombre, cantidad_bienes</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">no hay categorías registradas</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con { "data": [] }</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Incluir withCount('bienes') en la query. El Resource expone cantidad_bienes como conteo. Ordenar por nombre ASC.</div>
+  </div>
+
+  <!-- HU-01-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-03</span>
+      <span class="hu-title">Crear ubicación</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero registrar una nueva ubicación física para poder indicar dónde se encuentra un bien.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/ubicaciones con { "nombre": "Oficina 3B", "descripcion": "Tercer piso, ala B" }</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">el nombre no existe previamente</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 201 con { id, nombre, descripcion, created_at }</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Campos: nombre (required|unique), descripcion (nullable|string). El campo descripcion es opcional.</div>
+  </div>
+
+  <!-- HU-01-04 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-04</span>
+      <span class="hu-title">Listar ubicaciones</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver todas las ubicaciones disponibles para seleccionar dónde asignar un bien.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/ubicaciones</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con array de ubicaciones con: id, nombre, descripcion, cantidad_bienes</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> withCount('bienes'). Ordenar por nombre ASC.</div>
+  </div>
+
+  <!-- HU-01-05 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-05</span>
+      <span class="hu-title">Crear responsable</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero registrar a una persona como responsable para poder asignarle bienes a su cargo.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/responsables con { "nombre": "Juan Pérez", "email": "juan@org.cl", "cargo": "Analista" }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 201 con { id, nombre, email, cargo, created_at }</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">envío el mismo email de un responsable ya registrado</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con error "El email ya está registrado"</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Validaciones: nombre required|string, email required|email|unique:responsables,email, cargo nullable|string. Email único por responsable.</div>
+  </div>
+
+  <!-- HU-01-06 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-01-06</span>
+      <span class="hu-title">Listar responsables</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver el listado de responsables para poder asignar un bien a la persona correcta.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/responsables</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con array de responsables con: id, nombre, email, cargo, cantidad_bienes</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> withCount('bienes'). Ordenar por nombre ASC.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-02 REGISTRO DE BIENES
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-02</div>
+    <h2>Registro de bienes</h2>
+    <p>CRUD principal del sistema — crear, listar, ver y editar activos físicos</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-02</span>
+      <span class="toc-badge badge-alta">Alta prioridad</span>
+    </div>
+    <div class="feature-title">Registro y gestión de bienes (activos físicos)</div>
+    <div class="feature-desc">Núcleo del sistema. Permite registrar cada activo físico con su etiqueta única auto-generada, editarlo y consultarlo. Cada bien está vinculado a una categoría obligatoria y opcionalmente a un responsable y una ubicación.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>La etiqueta se genera automáticamente en formato B00001..B99999. Nunca la ingresa el usuario.</li>
+      <li>No se puede crear un bien con una categoría inexistente o dada de baja.</li>
+      <li>El JSON de respuesta siempre incluye los datos anidados de categoría, responsable y ubicación.</li>
+      <li>El listado soporta paginación (15 por página por defecto).</li>
+    </ul>
+  </div>
+
+  <!-- HU-02-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-02-01</span>
+      <span class="hu-title">Crear bien con etiqueta auto-generada</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero registrar un nuevo bien para que quede en el inventario con su etiqueta única y sus datos básicos.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">envío POST /api/v1/bienes con { "nombre": "Laptop Dell XPS", "categoria_id": 1, "descripcion": "Core i7, 16GB" }</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">los datos son válidos y la categoría existe</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 201 con el bien creado incluyendo etiqueta generada (ej: B00042)</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">el estado del bien es "activo" por defecto</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">dos requests llegan simultáneamente</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">las etiquetas generadas son distintas y sin duplicado (protegido por DB::transaction)</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> La etiqueta se genera en BienService dentro de DB::transaction: 'B' . str_pad(Bien::max('id') + 1, 5, '0', STR_PAD_LEFT). Estado inicial: 'activo'. categoria_id: required|exists:categorias,id. responsable_id y ubicacion_id: nullable.</div>
+  </div>
+
+  <!-- HU-02-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-02-02</span>
+      <span class="hu-title">Listar bienes con paginación</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver el listado paginado de bienes activos para poder revisar el inventario completo.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con los primeros 15 bienes activos (no dados de baja)</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">cada bien incluye: id, etiqueta, nombre, estado, categoria, ubicacion, responsable</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">la respuesta incluye metadatos de paginación: total, per_page, current_page, last_page</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?page=2</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo los bienes del 16 al 30</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Usar ->paginate(15). Solo bienes donde deleted_at IS NULL (SoftDeletes automático). Eager loading: with(['categoria', 'responsable', 'ubicacion']).</div>
+  </div>
+
+  <!-- HU-02-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-02-03</span>
+      <span class="hu-title">Ver detalle de un bien</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver todos los datos de un bien específico para conocer su estado, ubicación y responsable actual.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existe un bien con id = 42</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/42</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con todos los campos del bien más sus relaciones completas</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">el bien con id = 99 no existe</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 404 con mensaje "Bien no encontrado"</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> findOrFail() lanza ModelNotFoundException → el Handler lo convierte a 404 JSON automáticamente. Incluir: categoria, responsable, ubicacion.</div>
+  </div>
+
+  <!-- HU-02-04 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-02-04</span>
+      <span class="hu-title">Editar datos de un bien</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero actualizar el nombre, descripción o categoría de un bien registrado para corregir o ampliar su información.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">envío PUT /api/v1/bienes/42 con { "nombre": "Laptop Dell XPS 15", "categoria_id": 1 }</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">el bien existe y los datos son válidos</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con el bien actualizado</span></div>
+      <div style="margin-top:6px"><span class="g-dado">Dado que</span> <span class="g-text">el bien está dado de baja (deleted_at no null)</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 404 — los bienes dados de baja no se pueden editar</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> La etiqueta NO es editable (no incluirla en fillable del Request). Usar UpdateBienRequest separado. SoftDeletes hace que findOrFail() ignore registros con deleted_at.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-03 ESTADO Y BAJA
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-03</div>
+    <h2>Control de estado y baja de bienes</h2>
+    <p>Ciclo de vida del bien: activo, en reparación, en desuso, dado de baja</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-03</span>
+      <span class="toc-badge badge-alta">Alta prioridad</span>
+    </div>
+    <div class="feature-title">Control de estado y soft delete</div>
+    <div class="feature-desc">Gestiona el ciclo de vida de cada bien. Los estados válidos son: activo, en_reparacion, en_desuso. La baja usa soft delete — el registro permanece en la BD con deleted_at pero no aparece en listados normales. Un bien dado de baja no puede ser editado ni reasignado.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>Los únicos estados válidos son: activo, en_reparacion, en_desuso. Cualquier otro retorna 422.</li>
+      <li>Un bien dado de baja no aparece en el listado general de bienes activos.</li>
+      <li>La baja no borra el registro — establece deleted_at y estado = "dado_de_baja".</li>
+      <li>El motivo de baja es un campo de texto libre, obligatorio al dar de baja.</li>
+    </ul>
+  </div>
+
+  <!-- HU-03-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-03-01</span>
+      <span class="hu-title">Cambiar el estado de un bien</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero cambiar el estado de un bien para reflejar si está activo, en reparación o en desuso.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existe el bien B00042 con estado "activo"</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío PATCH /api/v1/bienes/42/estado con { "estado": "en_reparacion" }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con el bien actualizado y estado = "en_reparacion"</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío estado = "perdido" (valor inválido)</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con error "Estado no válido"</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Endpoint dedicado PATCH /bienes/{id}/estado. Validación: in:activo,en_reparacion,en_desuso. No usar el endpoint PUT general para cambios de estado — separación de responsabilidades. Ruta: Route::patch('/bienes/{bien}/estado', ...).</div>
+  </div>
+
+  <!-- HU-03-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-03-02</span>
+      <span class="hu-title">Dar de baja un bien (soft delete)</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero dar de baja un bien indicando el motivo para registrar que fue retirado del inventario sin perder el historial.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existe el bien B00042 con estado "activo"</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío DELETE /api/v1/bienes/42 con { "motivo_baja": "Equipo obsoleto, no reparable" }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con { "message": "Bien dado de baja correctamente" }</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">el bien ya no aparece en GET /api/v1/bienes</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">el campo deleted_at queda con fecha y hora del momento de la baja</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío DELETE sin motivo_baja</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con error "El motivo de baja es obligatorio"</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Usar SoftDeletes trait en el Model Bien. El campo motivo_baja se guarda antes de llamar $bien->delete(). Se puede implementar con un FormRequest DeleteBienRequest que valide solo motivo_baja. El DELETE no borra — ejecuta $bien->delete() que setea deleted_at.</div>
+  </div>
+
+  <!-- HU-03-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-03-03</span>
+      <span class="hu-title">Listar bienes dados de baja</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero consultar el listado de bienes dados de baja para tener un registro histórico de activos retirados.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/dados-de-baja</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con listado paginado de bienes donde deleted_at IS NOT NULL</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">cada bien incluye: etiqueta, nombre, motivo_baja, deleted_at (fecha de baja)</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Usar Bien::onlyTrashed()->paginate(15). Ruta independiente antes del apiResource para que no entre en conflicto con {id}.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-04 ASIGNACIÓN
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-04</div>
+    <h2>Asignación de bienes</h2>
+    <p>Vincular un bien a un responsable y a una ubicación física</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-04</span>
+      <span class="toc-badge badge-alta">Alta prioridad</span>
+    </div>
+    <div class="feature-title">Asignación de responsable y ubicación</div>
+    <div class="feature-desc">Resuelve la pregunta central del inventario: ¿quién tiene este bien y dónde está? La asignación es independiente de la edición general del bien — usa endpoints dedicados para mantener claridad en el historial de cambios y simplicidad en las validaciones.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>Un bien dado de baja no puede ser asignado ni reasignado.</li>
+      <li>El responsable y la ubicación deben existir en sus respectivas tablas.</li>
+      <li>La asignación es opcional — un bien puede existir sin responsable o sin ubicación.</li>
+      <li>La respuesta siempre devuelve el bien completo con sus relaciones actualizadas.</li>
+    </ul>
+  </div>
+
+  <!-- HU-04-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-04-01</span>
+      <span class="hu-title">Asignar bien a un responsable</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero asignar un bien a una persona responsable para saber quién tiene ese activo a su cargo.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existe el bien B00042 y el responsable con id = 5</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío PATCH /api/v1/bienes/42/responsable con { "responsable_id": 5 }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con el bien actualizado y responsable anidado en el JSON</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío responsable_id = 999 (no existe)</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 422 con "El responsable no existe"</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío { "responsable_id": null }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 — el bien queda sin responsable asignado</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Validación: nullable|integer|exists:responsables,id. Permite desasignar enviando null. Ruta: Route::patch('/bienes/{bien}/responsable', [BienController::class, 'asignarResponsable']).</div>
+  </div>
+
+  <!-- HU-04-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-04-02</span>
+      <span class="hu-title">Asignar bien a una ubicación</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero indicar en qué lugar físico se encuentra un bien para saber dónde encontrarlo.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">existe el bien B00042 y la ubicación con id = 3</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío PATCH /api/v1/bienes/42/ubicacion con { "ubicacion_id": 3 }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con el bien actualizado y ubicacion anidada en el JSON</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío { "ubicacion_id": null }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 — el bien queda sin ubicación asignada</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Misma lógica que responsable. Ruta: Route::patch('/bienes/{bien}/ubicacion', ...). Validación: nullable|integer|exists:ubicaciones,id.</div>
+  </div>
+
+  <!-- HU-04-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-04-03</span>
+      <span class="hu-title">Reasignar un bien (cambiar responsable o ubicación)</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero reasignar un bien que ya tiene responsable o ubicación para reflejar que cambió de manos o de lugar.</div>
+    <div class="gherkin">
+      <div><span class="g-dado">Dado que</span> <span class="g-text">el bien B00042 tiene responsable_id = 5 y se quiere cambiar a responsable_id = 8</span></div>
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío PATCH /api/v1/bienes/42/responsable con { "responsable_id": 8 }</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">la API retorna 200 con responsable actualizado a id = 8</span></div>
+      <div><span class="g-y">Y</span> <span class="g-text">el responsable anterior ya no aparece en el JSON de ese bien</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Esto es el mismo endpoint de HU-04-01 y HU-04-02 — no requiere código adicional. Se documenta como HU separada porque es un caso de uso diferente desde el negocio (reasignación, no primera asignación).</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-05 BÚSQUEDA
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-05</div>
+    <h2>Consulta y búsqueda de bienes</h2>
+    <p>Encontrar bienes por etiqueta, categoría, responsable o ubicación</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-05</span>
+      <span class="toc-badge badge-media">Media prioridad</span>
+    </div>
+    <div class="feature-title">Búsqueda y filtrado de bienes</div>
+    <div class="feature-desc">Permite a la app móvil encontrar bienes específicos usando query parameters en el endpoint de listado. La búsqueda por etiqueta es el caso de uso más frecuente (escaneo de código). Los filtros son combinables entre sí.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>Los filtros se aplican como query params sobre GET /api/v1/bienes.</li>
+      <li>Los filtros son acumulables: ?categoria_id=1&amp;estado=activo funciona correctamente.</li>
+      <li>Si no hay resultados, retorna 200 con array vacío, nunca 404.</li>
+      <li>La paginación se mantiene en todos los casos de filtro.</li>
+    </ul>
+  </div>
+
+  <!-- HU-05-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-05-01</span>
+      <span class="hu-title">Buscar bien por etiqueta</span>
+      <span class="toc-badge badge-alta">Alta · MVP</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero buscar un bien por su etiqueta (escaneada con la cámara) para acceder de inmediato a su información.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?etiqueta=B00042</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con el bien que tiene esa etiqueta exacta</span></div>
+      <div style="margin-top:6px"><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?etiqueta=B99999 (no existe)</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con { "data": [] }</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Filtro exacto (no LIKE): ->when($request->etiqueta, fn($q, $v) => $q->where('etiqueta', $v)). Se puede implementar con un scope local en el Model o en BienService. No crear endpoint separado — usar el listado con query param.</div>
+  </div>
+
+  <!-- HU-05-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-05-02</span>
+      <span class="hu-title">Filtrar bienes por categoría</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero filtrar bienes por categoría para ver solo los activos de un tipo específico (ej: solo tecnología).</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?categoria_id=1</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con bienes de la categoría id=1 paginados</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> ->when($request->categoria_id, fn($q, $v) => $q->where('categoria_id', $v)). Validar que categoria_id sea integer si está presente.</div>
+  </div>
+
+  <!-- HU-05-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-05-03</span>
+      <span class="hu-title">Filtrar bienes por responsable</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver todos los bienes asignados a una persona específica para hacer una auditoría de lo que tiene a cargo.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?responsable_id=5</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con todos los bienes activos del responsable id=5</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> ->when($request->responsable_id, fn($q, $v) => $q->where('responsable_id', $v)).</div>
+  </div>
+
+  <!-- HU-05-04 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-05-04</span>
+      <span class="hu-title">Filtrar bienes por ubicación</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver todos los bienes que están en una ubicación específica para hacer un inventario físico por sala o piso.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes?ubicacion_id=3</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con todos los bienes activos en la ubicación id=3</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> ->when($request->ubicacion_id, fn($q, $v) => $q->where('ubicacion_id', $v)).</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     F-06 INDICADORES
+══════════════════════════ -->
+<div class="page">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Feature F-06</div>
+    <h2>Resumen e indicadores del inventario</h2>
+    <p>Endpoints de agregación para el dashboard de la app móvil</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-header">
+      <span class="feature-id">F-06</span>
+      <span class="toc-badge badge-baja">Baja prioridad</span>
+    </div>
+    <div class="feature-title">Indicadores y resúmenes agregados</div>
+    <div class="feature-desc">Provee datos agregados para el dashboard inicial de la app móvil. Permite responder rápidamente preguntas de negocio: cuántos bienes hay, cuántos están en reparación, cuántos no tienen dueño asignado. Son endpoints de solo lectura (GET) sin parámetros.</div>
+    <h4>Criterios de aceptación generales</h4>
+    <ul class="ca-list">
+      <li>Todos los endpoints de esta feature son GET de solo lectura.</li>
+      <li>Los conteos no incluyen bienes con soft delete.</li>
+      <li>La respuesta siempre es un JSON plano (sin paginación).</li>
+      <li>Tiempo de respuesta aceptable: menos de 300ms con hasta 10.000 bienes.</li>
+    </ul>
+  </div>
+
+  <!-- HU-06-01 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-06-01</span>
+      <span class="hu-title">Conteo de bienes por estado</span>
+      <span class="toc-badge badge-media">Media</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver un resumen de cuántos bienes hay en cada estado para tener una visión general del inventario al abrir la app.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/resumen/estados</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con { "activo": 142, "en_reparacion": 8, "en_desuso": 15, "total": 165 }</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Bien::selectRaw('estado, count(*) as total')->groupBy('estado')->get(). Construir el array de respuesta en el Service. Ruta antes de apiResource para evitar conflicto con {bien}.</div>
+  </div>
+
+  <!-- HU-06-02 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-06-02</span>
+      <span class="hu-title">Resumen de bienes por categoría</span>
+      <span class="toc-badge badge-baja">Baja</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver cuántos bienes tiene cada categoría para entender la distribución del inventario.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/resumen/categorias</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con array de { "categoria": "Tecnología", "total": 87 } ordenado descendente</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> JOIN con categorias. Bien::with('categoria')->selectRaw('categoria_id, count(*) as total')->groupBy('categoria_id')->orderByDesc('total')->get().</div>
+  </div>
+
+  <!-- HU-06-03 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-06-03</span>
+      <span class="hu-title">Bienes sin responsable asignado</span>
+      <span class="toc-badge badge-baja">Baja</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver el listado de bienes que no tienen responsable para poder asignarlos y no perderlos.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/sin-responsable</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con listado paginado de bienes activos donde responsable_id IS NULL</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Bien::whereNull('responsable_id')->paginate(15). Solo bienes activos (soft delete automático).</div>
+  </div>
+
+  <!-- HU-06-04 -->
+  <div class="hu-card">
+    <div class="hu-header">
+      <span class="hu-id">HU-06-04</span>
+      <span class="hu-title">Bienes sin ubicación asignada</span>
+      <span class="toc-badge badge-baja">Baja</span>
+    </div>
+    <div class="hu-story">Como operador de la app móvil, quiero ver los bienes que no tienen ubicación registrada para poder localizarlos físicamente y actualizar su lugar.</div>
+    <div class="gherkin">
+      <div><span class="g-cuando">Cuando</span> <span class="g-text">envío GET /api/v1/bienes/sin-ubicacion</span></div>
+      <div><span class="g-entonces">Entonces</span> <span class="g-text">recibo 200 con listado paginado de bienes activos donde ubicacion_id IS NULL</span></div>
+    </div>
+    <div class="notes-box"><span class="notes-label">Notas técnicas:</span> Bien::whereNull('ubicacion_id')->paginate(15). Misma lógica que sin-responsable.</div>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="callout green" style="margin-top:28px">
+    <b>MVP completado cuando:</b> Las 15 historias de prioridad Alta pasan todos sus criterios de aceptación en ambiente de staging. Las 9 historias Media/Baja constituyen el backlog del segundo sprint.
+  </div>
+
+  <div class="callout orange" style="margin-top:12px">
+    <b>Decisiones de arquitectura que impactan todas las HU:</b> Todas las rutas viven en routes/api/v1/. Todos los endpoints siguen el patrón Controller (delgado) → Service (lógica) → Model (BD). Todas las respuestas usan API Resources. Todas las validaciones usan FormRequest dedicados. Los soft deletes son transparentes gracias al trait SoftDeletes — el filtro es automático en todos los queries.
+  </div>
+</div>
+
+</body>
+</html>
