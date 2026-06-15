@@ -26,8 +26,8 @@ Laravel 13 API (learning project). English naming throughout.
 - Validation rules use **array syntax**: `['required', 'string', 'max:150']`
 - API JSON auto-enabled for all `api/*` routes (`bootstrap/app.php:19`)
 - **One Service per entity** (e.g. `CategoryService`, `LocationService`) with CRUD methods
-- Tests: SQLite in-memory, `RefreshDatabase` trait, extend `Tests\TestCase`. **Only `CategoryTest` exists** — `LocationTest` missing
-- `.npmrc` has `ignore-scripts=true` — npm lifecycle hooks don't run
+- Tests: SQLite in-memory (phpunit.xml), `RefreshDatabase` trait, extend `Tests\TestCase`. `CategoryTest` and `ContactTest` exist; `LocationTest` missing
+- `.npmrc` has `ignore-scripts=true` (lifecycle hooks don't run) and `audit=true` — `npm install` will list vulnerabilities and may fail audit on CI
 - `.env`: `QUEUE_CONNECTION=database`, `SESSION_DRIVER=database`, `CACHE_STORE=database`
 - **No Sanctum** — API is fully public
 - **⚠️ Route casing bug**: `routes/api.php` requires `'api/v1/catalogues.php'` (lowercase) but actual dir is `api/V1/` (uppercase). Works on Windows, fails on Linux
